@@ -1,10 +1,27 @@
-<activity
-    android:name=".ui.LoginActivity"
-    android:exported="true">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.seedrapp">
 
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-    </intent-filter>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
-</activity>
+    <application
+        android:label="Seedr App"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <activity
+            android:name=".ui.FileBrowserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+    </application>
+
+</manifest>
