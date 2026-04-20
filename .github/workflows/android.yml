@@ -16,12 +16,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      # Install Gradle manually
-      - name: Install Gradle
-        run: |
-          wget https://services.gradle.org/distributions/gradle-8.5-bin.zip
-          unzip gradle-8.5-bin.zip
-          export PATH=$PATH:$PWD/gradle-8.5/bin
+      # ✅ Install correct Gradle version
+      - name: Setup Gradle 8.5
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.5
 
       - name: Build APK
         run: gradle assembleDebug
