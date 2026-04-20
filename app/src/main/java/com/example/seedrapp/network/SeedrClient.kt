@@ -21,10 +21,18 @@ class SeedrClient {
 
         return try {
 
-            val response = client.newCall(Request.Builder().url(url).build()).execute()
+            val request = Request.Builder()
+                .url(url)
+                .addHeader("User-Agent", "Mozilla/5.0 (Android)")
+                .addHeader("Accept", "application/json")
+                .addHeader("Referer", "https://www.seedr.cc/")
+                .build()
+
+            val response = client.newCall(request).execute()
             val body = response.body?.string() ?: return emptyList()
 
-            // 🚨 critical fix: avoid crash if not logged in
+            println("API RESPONSE: $body")
+
             if (!body.trim().startsWith("{")) {
                 return emptyList()
             }
