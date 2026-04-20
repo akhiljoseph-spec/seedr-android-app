@@ -5,7 +5,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.seedrapp.R
 import com.example.seedrapp.network.SeedrClient
 import com.example.seedrapp.ui.adapter.FileAdapter
 import com.example.seedrapp.utils.DownloadHelper
@@ -37,14 +36,14 @@ class FileBrowserActivity : AppCompatActivity() {
                 runOnUiThread {
 
                     if (files.isEmpty()) {
-                        Toast.makeText(this, "No files / Not logged in yet", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "No files / Not logged in yet", Toast.LENGTH_LONG).show()
                     }
 
                     rv.adapter = FileAdapter(files) { file ->
 
                         if (file.type == "folder") return@FileAdapter
 
-                        val options = arrayOf("Play", "Download", "Copy Link")
+                        val options = arrayOf("Play", "Download")
 
                         MaterialAlertDialogBuilder(this)
                             .setTitle(file.name)
@@ -58,10 +57,6 @@ class FileBrowserActivity : AppCompatActivity() {
                                     1 -> file.downloadUrl?.let {
                                         DownloadHelper.download(this, it)
                                     } ?: showToast("Download not ready")
-
-                                    2 -> {
-                                        showToast("Link copied (not implemented fully)")
-                                    }
                                 }
                             }
                             .show()
