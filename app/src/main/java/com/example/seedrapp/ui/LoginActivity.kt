@@ -28,20 +28,23 @@ class LoginActivity : AppCompatActivity() {
         cookieManager.setAcceptThirdPartyCookies(webView, true)
 
         webView.webViewClient = object : WebViewClient() {
+
             override fun onPageFinished(view: WebView?, url: String?) {
 
                 if (url?.contains("seedr.cc/files") == true) {
 
-                    // Ensure cookies are saved
-                    CookieManager.getInstance().flush()
+                    val cm = CookieManager.getInstance()
+                    cm.flush()
 
-                    // Delay to ensure session is ready
+                    val cookies = cm.getCookie("https://www.seedr.cc")
+                    println("COOKIES: $cookies")
+
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         startActivity(Intent(this@LoginActivity, FileBrowserActivity::class.java))
                         finish()
 
-                    }, 1200)
+                    }, 1500)
                 }
             }
         }
